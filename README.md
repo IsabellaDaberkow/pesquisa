@@ -16,10 +16,11 @@ O fluxo é: login → boas-vindas → edição do perfil. A redefinição de sen
 
 ## Configuração do Supabase
 
-1. Copie `.env.example` para `.env.local` e preencha `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` com os valores públicos do seu projeto Supabase. Não use uma chave `service_role` no aplicativo.
+1. Crie um projeto no Supabase. Em **Project Settings → API**, copie a Project URL e a chave pública `anon`/publishable. Copie `.env.example` para `.env.local` e preencha `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`. Não use uma chave `service_role` no aplicativo.
 2. No SQL Editor do Supabase, execute [`supabase/schema.sql`](./supabase/schema.sql). O script cria `profiles`, habilita RLS com políticas por usuário e cria o bucket privado com limite de 5 MB e tipos de imagem permitidos.
 3. Em **Authentication → URL Configuration**, inclua a URL da aplicação e a URL de redirecionamento `/password-reset` na lista de redirecionamentos permitidos. Por exemplo, durante o desenvolvimento com Vite: `http://localhost:5173/password-reset` (ajuste à porta usada pelo seu servidor).
 4. Reinicie o servidor depois de criar ou alterar `.env.local`.
+5. Com o servidor reiniciado, crie a conta pela opção **Criar minha conta** na tela de login. Se a confirmação de e-mail estiver habilitada no Supabase, confirme o endereço recebido antes de entrar.
 
 ## Executar
 

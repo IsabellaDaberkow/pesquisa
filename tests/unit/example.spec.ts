@@ -15,7 +15,8 @@ describe('LoginPage.vue', () => {
 
     const wrapper = mount(LoginPage, { global: { plugins: [IonicVue, router] } })
     expect(wrapper.text()).toContain('Entrar no aplicativo')
+    expect(wrapper.text()).toContain('Criar minha conta')
     expect(wrapper.text()).toContain('Esqueci minha senha')
-    expect(wrapper.text()).toContain('VITE_SUPABASE_URL')
+    expect(wrapper.text()).toContain('.env.local')
   })
 })

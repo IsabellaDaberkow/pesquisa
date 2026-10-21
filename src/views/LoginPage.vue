@@ -8,8 +8,8 @@
           <p class="muted">Acesse sua conta para continuar.</p>
 
           <ion-note v-if="!isSupabaseConfigured" color="warning" class="feedback">
-            Configure as variáveis VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY no arquivo
-            .env.local para habilitar a conexão.
+            O acesso está desativado porque o Supabase ainda não foi configurado. Crie o arquivo
+            .env.local com as credenciais do projeto e reinicie o servidor.
           </ion-note>
           <ion-note v-else-if="route.query.setup === 'required'" color="warning" class="feedback">
             Configure a conexão com o Supabase antes de acessar essa área.
@@ -47,6 +47,15 @@
             </ion-item>
             <ion-button expand="block" type="submit" :disabled="busy || !isSupabaseConfigured">
               {{ busy ? 'Entrando...' : 'Entrar' }}
+            </ion-button>
+            <ion-button
+              expand="block"
+              fill="clear"
+              type="button"
+              :disabled="busy || !isSupabaseConfigured"
+              @click="handleSignUp"
+            >
+              Criar minha conta
             </ion-button>
           </form>
 
@@ -134,6 +143,32 @@ async function handlePasswordReset() {
     feedbackColor.value = 'success';
   } catch (error) {
     feedback.value = error instanceof Error ? error.message : 'Não foi possível solicitar a recuperação.';
+    feedbackColor.value = 'danger';
+  } finally {
+    busy.value = false;
+  }
+}
+
+async function handleSignUp() {
+  busy.value = true;
+  feedback.value = '';
+
+  try {
+    const { data, error } = await getSupabase().auth.signUp({
+      email: email.value,
+      password: password.value
+    });
+    if (error) throw error;
+
+    if (data.session) {
+      await router.replace('/welcome');
+      return;
+    }
+
+    feedback.value = 'Conta criada. Confira seu e-mail para confirmar o cadastro antes de entrar.';
+    feedbackColor.value = 'success';
+  } catch (error) {
+    feedback.value = error instanceof Error ? error.message : 'Não foi possível criar a conta.';
     feedbackColor.value = 'danger';
   } finally {
     busy.value = false;
