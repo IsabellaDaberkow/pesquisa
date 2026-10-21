@@ -1,2 +1,68 @@
 /* For information on how to create your own theme, please refer to:
 http://ionicframework.com/docs/theming/ */
+
+:root {
+  --ion-color-primary: #6157d9;
+  --ion-color-primary-rgb: 97, 87, 217;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #554dc0;
+  --ion-color-primary-tint: #7169de;
+}
+
+body {
+  background: #f4f5fb;
+}
+
+.auth-shell,
+.welcome-shell,
+.profile-shell {
+  display: grid;
+  min-height: 100%;
+  place-items: center;
+  padding: 2rem 0;
+}
+
+.auth-card,
+.welcome-card,
+.profile-card {
+  width: min(100%, 32rem);
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border: 1px solid rgba(97, 87, 217, 0.1);
+  border-radius: 1.25rem;
+  background: var(--ion-background-color, #ffffff);
+  box-shadow: 0 1.25rem 3rem rgba(37, 35, 77, 0.08);
+}
+
+.welcome-card {
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--ion-color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.auth-card h1,
+.welcome-card h1 {
+  margin-top: 0.25rem;
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+}
+
+.muted {
+  color: var(--ion-color-medium);
+}
+
+.auth-card ion-item,
+.profile-card ion-item {
+  margin: 0.75rem 0;
+  --border-radius: 0.5rem;
+}
+
+.auth-card ion-button,
+.profile-card form ion-button {
+  margin-top: 1rem;
+}
